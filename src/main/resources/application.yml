@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    username: admin
+    password: ${PASSWORD_ELITEGH_DB}
+    url: jdbc:mysql://${HOST_ELITEGH_DB}:3306/eliteghdb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-only
+    show-sql: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui-custom.html
+    operationsSorter: method
