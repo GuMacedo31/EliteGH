@@ -10,19 +10,18 @@ import org.springframework.web.bind.annotation.*
 class CourseController(private val courseService: CourseService) {
 
     @GetMapping("/{id}")
-    fun retrieveById(@PathVariable id: Long): CourseView {
-        return courseService.retrieveById(id)
-    }
+    fun retrieveById(@PathVariable id: Long): CourseView =
+        courseService.retrieveById(id)
 
     @GetMapping
-    fun retrieveAll(): List<CourseView> {
-        return courseService.retrieveAll()
-    }
+    fun retrieveAll(): List<CourseView> =
+        courseService.retrieveAll()
+
+    @GetMapping("/{courseTitle}")
+    fun retrieveByName(@PathVariable courseTitle: String): CourseView =
+        courseService.retrieveByTitle(courseTitle)
 
     @PostMapping
-    fun create(
-        @RequestBody courseForm: CourseForm
-    ) {
+    fun create(@RequestBody courseForm: CourseForm) =
         courseService.create(courseForm)
-    }
 }

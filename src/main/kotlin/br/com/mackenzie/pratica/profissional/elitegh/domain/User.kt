@@ -12,12 +12,18 @@ data class User(
     @Column(unique = true)
     val email: String,
     @JsonIgnore
-    val password: String,
+    var password: String,
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "course_student",
         joinColumns = [JoinColumn(name = "user_id")],
         inverseJoinColumns = [JoinColumn(name = "course_id")]
     )
-    var courses: MutableSet<Course> = linkedSetOf()
+    var courses: MutableSet<Course> = linkedSetOf(),
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_role")
+    var role: MutableSet<Role> = mutableSetOf()
 )

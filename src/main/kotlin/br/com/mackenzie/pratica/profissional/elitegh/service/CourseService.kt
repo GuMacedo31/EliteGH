@@ -28,6 +28,10 @@ class CourseService(
         }
     }
 
+    fun retrieveByTitle(courseTitle: String): CourseView {
+        return courseViewMapper.map(courseRepository.findByTitle(courseTitle))
+    }
+
     fun create(courseForm: CourseForm) {
         val course = courseFormMapper.map(courseForm)
         courseRepository.save(course)

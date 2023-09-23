@@ -15,3 +15,8 @@ springdoc:
   swagger-ui:
     path: /swagger-ui-custom.html
     operationsSorter: method
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET}

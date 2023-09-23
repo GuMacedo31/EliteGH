@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface CourseRepository : JpaRepository<Course, Long> {
     fun findAllByOrderByAvailableDesc(): List<Course>
+    fun findByTitle(courseTitle: String): Course
 }

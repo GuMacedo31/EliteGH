@@ -9,6 +9,7 @@ class UserViewMapper() : Mapper<User, UserView> {
     override fun map(t: User) = UserView(
         name = t.name,
         email = t.email,
-        enrolledCourses = t.courses
+        enrolledCourses = t.courses,
+        role = t.role
     )
 }
