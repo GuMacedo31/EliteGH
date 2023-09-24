@@ -17,7 +17,7 @@ class CourseController(private val courseService: CourseService) {
     fun retrieveAll(): List<CourseView> =
         courseService.retrieveAll()
 
-    @GetMapping("/{courseTitle}")
+    @GetMapping("/title/{courseTitle}")
     fun retrieveByName(@PathVariable courseTitle: String): CourseView =
         courseService.retrieveByTitle(courseTitle)
 
