@@ -6,6 +6,7 @@ import org.springframework.security.core.AuthenticationException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
+import java.sql.SQLIntegrityConstraintViolationException
 
 @ControllerAdvice
 class ExceptionHandler {
@@ -30,6 +31,13 @@ class ExceptionHandler {
     fun handleAuthException(ex: AuthenticationException): ResponseEntity<Any> {
         val response = mapOf("message" to ex.message)
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response)
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleAuthException(): ResponseEntity<Any> {
+        val response = mapOf("message" to "Email já cadastrado")
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response)
     }
 
 }
