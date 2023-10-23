@@ -2,7 +2,7 @@ package br.com.mackenzie.pratica.profissional.elitegh.service
 
 import br.com.mackenzie.pratica.profissional.elitegh.domain.dto.CourseForm
 import br.com.mackenzie.pratica.profissional.elitegh.domain.dto.CourseView
-import br.com.mackenzie.pratica.profissional.elitegh.exception.NotFoundException
+import br.com.mackenzie.pratica.profissional.elitegh.exception.CourseNotFoundException
 import br.com.mackenzie.pratica.profissional.elitegh.mapper.CourseFormMapper
 import br.com.mackenzie.pratica.profissional.elitegh.mapper.CourseViewMapper
 import br.com.mackenzie.pratica.profissional.elitegh.repository.CourseRepository
@@ -18,7 +18,7 @@ class CourseService(
     fun retrieveById(id: Long): CourseView {
         return courseRepository.findById(id).map {
             courseViewMapper.map(it)
-        }.orElseThrow { NotFoundException("Curso não encontrado") }
+        }.orElseThrow { CourseNotFoundException("Curso não encontrado") }
     }
 
     fun retrieveAll(): List<CourseView> {
@@ -29,7 +29,9 @@ class CourseService(
     }
 
     fun retrieveByTitle(courseTitle: String): CourseView {
-        return courseViewMapper.map(courseRepository.findByTitle(courseTitle))
+        return courseViewMapper.map(
+            courseRepository.findByTitle(courseTitle)
+                .orElseThrow { CourseNotFoundException("Curso não encontrado") })
     }
 
     fun create(courseForm: CourseForm) {
